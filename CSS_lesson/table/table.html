@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        td>img{
+    width: 250;
+    height: 250;
+}
+table{
+    border-collapse: collapse;
+    width: 750;
+    overflow: hidden;
+    margin: auto;
+    text-align: center;
+}
+thead{
+    background-color: azure;
+    height: 50px;
+}
+tbody>tr:nth-child(even){
+    background-color: azure;
+
+}
+td>img:hover{
+    transform: scale(0.9);
+    transition-duration: 1s;
+}
+    </style>
+</head>
+<body>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Color</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Banana</td>
+                <td><img src="https://i.pinimg.com/736x/5a/d4/e4/5ad4e4dec5e9873428b9b20188088a17.jpg" alt="Apple">
+                </td>
+                <td>Red</td>
+            </tr>
+            <tr>
+                <td>Mango</td>
+                <td><img src="https://i.pinimg.com/736x/82/4b/6b/824b6b98774ccee5a7f2ba626141c1f4.jpg" alt="mango"></td>
+                <td>Yellow</td>
+            </tr>
+            <tr>
+                <td>Avocado</td>
+                <td><img src="https://i.pinimg.com/736x/a9/10/f7/a910f76ccc5a6a547078d18eb4a3189d.jpg" alt="avocado"></td>
+                <td>Green</td>
+            </tr>
+            <tr>
+                <td>Watermelon</td>
+                <td><img src="https://i.pinimg.com/736x/06/59/c1/0659c16e02abcd94596855c0b5b2b67c.jpg" ></td>
+                <td>Green</td>
+            </tr>
+            <tr>
+                <td>Orange</td>
+                <td><img src="https://i.pinimg.com/736x/90/28/81/90288198edffa1d0f96b194ae0448409.jpg" alt="papaya"></td>
+                <td>orange</td>
+            </tr>
+            <tr>
+                <td>Strawberry</td>
+                <td><img src="https://i.pinimg.com/736x/52/72/3d/52723d87b2d0639480a833690f56aadc.jpg" alt="strawberry"></td>
+                <td>Red</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,77 @@
+*{
+    background-color: cadetblue;
+    font-size: 1rem;
+    /* color: red; */
+}
+
+
+/* calling element selector */
+/* body{
+    background-color: rgb(96, 95, 160);
+} */
+
+p{
+    color:black;
+    font-variant: small-caps;
+}
+
+/* classname selector */
+.text-display{
+    color:blueviolet;
+}
+
+/* id selector */
+#display-text{
+    color:blanchedalmond;
+}
+
+/* attribute selector */
+[width]{
+   width: 200px;
+   height: 200px;
+}
+
+img{
+    width: 500px;
+    height: 500px;
+}
+
+#image-display{
+    width: 600px;
+    height: 600px;
+}
+
+.display-image{
+    width: 300px;
+    height: 300px;
+}
+
+/* data attribute style */
+[data-custom="lg"]{
+    font-size: 32px;
+    color:red;
+}
+
+/* group selector */
+h1,h2,h3{
+    color:blue;
+}
+
+/* combinator space(" ") */
+div span{
+    color:yellowgreen;
+    font-size: 20px;
+}
+
+/* combinator > */
+ul>li{
+    list-style-type: none;
+}
+ul>a{
+    color:red;
+}
+
+/* pseudo  */
+ul>li:nth-child(even){
+    color:aquamarine;
+}

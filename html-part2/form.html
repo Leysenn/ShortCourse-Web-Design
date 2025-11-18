@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- form -->
+    <form 
+    action="index.html"
+    method="get"
+    target="_blank"
+    enctype="text/plain"
+    >
+        <!-- form body -->
+        <label for="firstName">FisrtName</label><br>
+        <input type="text" id="firstName" name="firstName" placeholder="Dara"  required>
+
+        <!-- email -->
+        <br> <label for="email">Email</label><br>
+        <input type="email" name="email" id="email"
+        placeholder="example.@gmail.com" required>
+
+        <!-- password -->
+        <br><label for="password">Password</label><br>
+        <input type="password" name="password" id="password"
+        placeholder="Dara123$#%" required pattern="">
+
+      <br><!-- date -->
+        <label for="datetime">Date Of Birth</label><br>
+        <input type="datetime" name="datetime" id="datetime">
+
+        <!-- Checkbox -->
+        <br><label for="currentPosition">Position</label><br>
+        <input type="checkbox" value="student" id="student" name="student">
+        <label for="student" >Student</label>
+        <!-- <input type="student" value="employer" id="employer"> -->
+        <label for="employer">employer</label>
+        
+
+        <!-- Using checkbox with fieldsest -->
+        <fieldset>
+            <legend>Choose your position</legend>
+            <input type="checkbox"  value="student"  name="student">
+            <label for="student" >student</label>
+            <input type="student" value="employer" id="emplooyer">
+            <label for="employer">employer</label>
+            </fieldset>
+        
+        <!-- file -->
+        <label for="profile">Choose</label>
+        <input type="file" name="profile" id="profile" accept="image/png">
+
+        <!-- Number -->
+        <label for="number">Number</label>
+        <input type="number" name="number" id="number">
+
+        <!-- telephone -->
+        <label for="telephone">Telephone</label>
+        <input type="tel" name="telephone" id="telephone" 
+        value="087755147" readonly>
+
+        <!--  Color -->
+        <label for="color">Color</label>
+        <input type="color" value="color" id="color" name="color">
+
+
+        <!-- range -->
+        <input type="range" name="range" id="range" min="0" max="100">
+
+
+        <!-- radio -->
+        <label for="radio"></label>
+        <input type="radio" name="radio" id="radio">
+
+
+        <!-- search -->
+        <label for="search">Search</label>
+        <input type="search" name="search" id="search">
+        <input type="submit" value="submit Info">
+        
+
+        <!-- dropdown -->
+        <!-- <select name="" id=""></select> -->
+        
+
+
+        <!-- hidden -->
+        <label for="hidden">Hidden</label>
+        <input type="hidden" name="" id="">
+
+
+        <!-- reset -->
+        <label for="reset">Reset</label>
+        <input type="reset" value="reset" >
+
+
+        <!-- URL -->
+        
+
+        <!-- week -->
+        <input type="week" name="week" id="week">
+
+    </form>
+    <!--  popover -->id
+    <input type="button" id="popover" popovertarget="display-gallery" value="PopOver">
+    <div id="display-gallery" popover="hint">
+        <img src="../image/cat.jpg" alt="">
+    </div>
+</body>
+</html>

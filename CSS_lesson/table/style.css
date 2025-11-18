@@ -1,0 +1,23 @@
+td>img{
+    width: 250;
+    height: 250;
+}
+table{
+    border-collapse: collapse;
+    width: 750;
+    overflow: hidden;
+    margin: auto;
+    text-align: center;
+}
+thead{
+    background-color: azure;
+    height: 50px;
+}
+tbody>tr:nth-child(even){
+    background-color: azure;
+
+}
+td>img:hover{
+    transform: scale(0.9);
+    transition-duration: 1s;
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Register</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  
+  <div class="header">
+    <img src="./istad.png" alt="ISTAD Logo" >
+    <center>
+    <h1>REGISTRATION FORM</h1>
+    <h2>INSTITUTE OF SCIENCE AND TECHNOLOGY ADVANCED DEVELOPMENT</h2>
+  </center>
+  </div>
+
+
+  <img src="./photo_2025-10-24_20-44-35.jpg" class="photo" alt="My photo"  width="500" height="500"><br>
+  
+  <div class="info">
+    <p><strong>Date:</strong> August 19th, 2004</p>
+    <p><strong>Location:</strong><a href="https://maps.app.goo.gl/5FP26mdd437qWSXX6"> Phnom Penh</a></p>
+    <p><strong>Tell:</strong><a href="087755147">087755147</a></p>
+    <p><strong>Email:</strong><a href="leysen.sen@gmail.com">leysen.sen@gmail.com</a></p>
+    <p><strong>Facebook:</strong><a href="https://www.facebook.com/share/1ZdBY8xssw/">Ley Sen</a></p>
+  </div>
+
+  
+
+  <form
+  action=""
+  method="get"
+  target="_blank"
+  enctype="text/plain"
+  >
+    
+    <fieldset>
+    
+    <legend class="class-center">Personal Information</legend>
+
+    <label for="national-id">National ID:</label>
+    <input type="text" id="national-id" name="national-id" placeholder="087755147" required>
+    
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" name="name" placeholder="Sen" required>
+
+    <br><label for="email">Email:</label>
+    <input type="email" id="email" name="email" placeholder="example.@gmail.com" required>
+
+    <br><label for="password">Password:</label>
+    <input type="password" id="password" name="password" placeholder="123#%&">
+
+
+    <br><label for="favcolor">Gender:</label>
+    <select id="favcolor" name="favcolor">
+      <option value="red">Male</option>
+      <option value="blue">Female</option>
+    </select><br>
+
+
+    
+
+    <label >Course</label>
+        <input type="checkbox"> Web Design<br>
+        <input type="checkbox"> Java Programming
+
+    <label for="dob">Date Of Birth</label>
+    <input type="datetime-local" name="dob" id="dob">
+    
+    <br><label for="address"> Current Address:</label>
+    <textarea id="address" name="address" rows="3"></textarea>
+
+
+    <label >What you want?</label>
+        <input type="text" placeholder="Search here">
+        <input type="submit" value="Submit">
+
+
+  <label for="browser">Choose Your Browser:</label>
+  <input list="favorite-browser" id="favorite-browsers" name="favorite-browsers">
+  <datalist id="favorite-browser">
+    <option value="Google Chrome">Google Chrome</option>
+    <option value="Microsoft Edge">Microsoft Edge</option>
+    <option value="Opera">Opera</option>
+  </datalist>
+
+  <label>File progress:</label>
+  <input type="range" name="range" id="range" min="0" max="100">
+
+  <label for="color">Color</label>
+  <input type="color" value="color" id="color" name="color">
+
+
+  <label for="profile">Profile</label> 
+  <input type="file" name="profile" id="profile" accept="image/png, image/jpeg, image/jpg">
+
+</fieldset>
+
+  </form>
+</div>
+</body>
+</html>

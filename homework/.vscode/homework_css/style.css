@@ -1,0 +1,106 @@
+/* Basic Reset and Container Setup */
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: white; /* Light background */
+}
+
+.container {
+    display: grid;
+    /* Define 3 equal columns for the main content area */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px; /* Spacing between grid items */
+    max-width: 1200px; /* Max width for the whole page */
+    margin: 0 auto;
+    
+    /* Define the named areas for the layout */
+    grid-template-areas:
+        "header header tutorial"
+        "guide guide guide"
+        "examples 15px patterns "
+        "resources resources news-signup"
+        "questions about-grid news"
+        "grid-bugs grid-bugs grid-bugs";
+}
+
+/* General Styling for all Grid Items (The boxes) */
+.grid-item {
+    padding: 20px;
+    background-color: gainsboro; /* White box background */
+    border: 1px solid #ddd; /* Light border */
+}
+
+h1, h2 {
+    margin-top: 0;
+}
+
+/* Specific Area Placement */
+.header {
+    grid-area: header;
+    background-color: #333; /* Dark background for the main title bar */
+    color: white;
+}
+
+.video-tutorial {
+    grid-area: tutorial;
+}
+
+.guide-banner {
+    grid-area: guide;
+    background-color: #5b2c6f; /* Purple banner */
+    color: white;
+    padding: 15px 20px;
+}
+
+.examples {
+    grid-area: examples;
+    /* Add styling for the 'New!' tag */
+    position: relative;
+    overflow: hidden;
+    grid-column: 100px;
+   
+}
+
+.new::before {
+    content: "New!";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #7dce8a; /* Green tag color */
+    color: white;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.patterns {
+    grid-area: patterns;
+    
+}
+
+/* This item spans two rows on the right side */
+.news-signup {
+    grid-area: news-signup;
+}
+
+.resources {
+    grid-area: resources;
+    
+}
+
+.questions {
+    grid-area: questions;
+}
+
+.about-grid {
+    grid-area: about-grid;
+}
+
+/* This item spans two rows and sits on the right of the bottom section */
+.news {
+    grid-area: news;
+}
+
+.grid-bugs {
+    grid-area: grid-bugs;
+}

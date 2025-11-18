@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khmer Calendar Grid - October 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Khmer OS Siemreap', 'Noto Sans Khmer', sans-serif; /* Prioritize Khmer font */
+            background-color: #f0f2f5;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .calendar-container {
+            display: flex;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .calendar-main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: #f7fafc;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .calendar-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .month-navigation button {
+            background-color: #edf2f7;
+            border: 1px solid #cbd5e0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+
+        .day-names {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-weight: 600;
+            color: #4a5568;
+            padding: 10px 0;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 10px;
+            background-color: #ebf8ff; /* Light blue background for day names */
+            border-radius: 8px;
+        }
+        .day-names > div {
+            padding: 5px 0;
+            background-color: #10b981; /* Green header cells */
+            color: white;
+            font-size: 0.9em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+            border-right: 1px solid rgba(255,255,255,0.2); /* faint separator */
+        }
+        .day-names > div:last-child {
+            border-right: none;
+        }
+        .day-names > div:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+        .day-names > div:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr); /* 7 columns for days of the week */
+            gap: 5px; /* Spacing between day cells */
+        }
+
+        .day-cell {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px 5px;
+            text-align: center;
+            min-height: 80px; /* Adjust height for content */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+            color: #2d3748; /* Dark gray for default days */
+            position: relative;
+        }
+
+        .day-cell.other-month {
+            color: #cbd5e0; /* Lighter color for days outside the current month */
+            background-color: #fbfdff;
+            border-color: #ebf8ff;
+        }
+
+        .day-cell .date-number {
+            font-weight: 700;
+            font-size: 1.4em;
+            line-height: 1;
+        }
+
+        .day-cell .khmer-lunar {
+            font-size: 0.8em;
+            color: #718096;
+            line-height: 1;
+            margin-top: 3px;
+        }
+
+        /* Special Day Styles */
+        .day-cell.thngai-sil {
+            background-color: #d1fae5; /* Light green background for Thngai Sil */
+            border-color: #34d399;
+            color: #065f46;
+        }
+        .day-cell.thngai-sil .date-number,
+        .day-cell.thngai-sil .khmer-lunar {
+            color: #065f46; /* Darker green text */
+        }
+
+        .day-cell.holiday {
+            background-color: #fee2e2; /* Light red background for holidays */
+            border-color: #ef4444;
+            color: #991b1b;
+        }
+        .day-cell.holiday .date-number,
+        .day-cell.holiday .khmer-lunar {
+            color: #991b1b;
+        }
+        .day-cell.holiday .lunar-marker {
+            color: #ef4444; /* Red triangle */
+            font-size: 1.5em;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+        /* Style for the right-hand holiday list */
+        .holiday-list-sidebar {
+            width: 380px; /* Fixed width for the sidebar */
+            background-color: #fdfdfd;
+            border-left: 1px solid #e2e8f0;
+            padding: 20px;
+            overflow-y: auto; /* Enable scrolling if list is long */
+        }
+
+        .sidebar-header {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .holiday-item {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .holiday-item:hover {
+            background-color: #eff6ff;
+        }
+
+        .holiday-item .date {
+            font-weight: 700;
+            color: #10b981; /* Green date */
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        .holiday-item .name-khmer {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .holiday-item .name-english {
+            font-size: 0.85em;
+            color: #4a5568;
+            margin-top: 3px;
+        }
+
+        .holiday-item.public-holiday {
+            background-color: #fee2e2; /* Light red for public holidays */
+            border-color: #ef4444;
+        }
+        .holiday-item.public-holiday .date,
+        .holiday-item.public-holiday .name-khmer,
+        .holiday-item.public-holiday .name-english {
+            color: #ef4444; /* Red text for public holidays */
+        }
+
+        /* Footer */
+        .calendar-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #718096;
+            padding: 10px;
+            background-color: #f7fafc;
+            border-top: 1px solid #e2e8f0;
+            border-radius: 0 0 12px 12px; /* Rounded bottom corners */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .calendar-container {
+                flex-direction: column;
+            }
+            .holiday-list-sidebar {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+                border-radius: 0;
+            }
+            .calendar-footer {
+                 border-radius: 0 0 12px 12px;
+            }
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .calendar-main {
+                padding: 10px;
+            }
+            .calendar-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .calendar-title {
+                font-size: 1.3rem;
+            }
+            .day-cell {
+                min-height: 60px;
+                padding: 5px 3px;
+                font-size: 0.9rem;
+            }
+            .day-cell .date-number {
+                font-size: 1.2em;
+            }
+            .day-cell .khmer-lunar {
+                font-size: 0.7em;
+            }
+            .day-names > div {
+                font-size: 0.8em;
+                height: 35px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="calendar-container">
+        <!-- Left Side: Calendar Grid --><div class="calendar-main">
+            <div class="calendar-header">
+                <div class="month-navigation">
+                    <button>&lt;</button>
+                    <button>&gt;</button>
+                </div>
+                <h2 class="calendar-title">តុលា October 2025</h2>
+                <!-- Could add a year selection dropdown here --><div></div> <!-- Placeholder to balance flex --></div>
+
+            <div class="day-names">
+                <div>អាទិត្យ</div> <!-- Sunday --><div>ចន្ទ</div>     <!-- Monday --><div>អង្គារ</div>    <!-- Tuesday --><div>ពុធ</div>     <!-- Wednesday --><div>ព្រហស្បតិ៍</div> <!-- Thursday --><div>សុក្រ</div>     <!-- Friday --><div>សៅរ៍</div>     <!-- Saturday --></div>
+
+            <div class="calendar-grid">
+                <!-- Days from previous month (September) --><div class="day-cell other-month">
+                    <span class="date-number">28</span>
+                    <span class="khmer-lunar">១២ កើត</span>
+                </div>
+                <div class="day-cell other-month">
+                    <span class="date-number">29</span>
+                    <span class="khmer-lunar">១៣ កើត</span>
+                </div>
+                <div class="day-cell other-month">
+                    <span class="date-number">30</span>
+                    <span class="khmer-lunar">១៤ កើត</span>
+                </div>
+                
+                <!-- October 2025 Days --><!-- Week 1 --><div class="day-cell other-month">
+                    <span class="date-number">30</span>
+                    <span class="khmer-lunar">១៤ កើត</span>
+                </div>
+                <div class="day-cell holiday">
+                    <span class="date-number">1</span>
+                    <span class="khmer-lunar">១៥ កើត</span>
+                    <span class="lunar-marker">&#9650;</span> <!-- Triangle marker for holidays --></div>
+                <div class="day-cell">
+                    <span class="date-number">2</span>
+                    <span class="khmer-lunar">១ រោច</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">3</span>
+                    <span class="khmer-lunar">២ រោច</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">4</span>
+                    <span class="khmer-lunar">៣ រោច</span>
+                </div>
+
+                <!-- Week 2 --><div class="day-cell thngai-sil">
+                    <span class="date-number">5</span>
+                    <span class="khmer-lunar">៤ រោច</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">6</span>
+                    <span class="khmer-lunar">៥ រោច</span>
+                </div>
+                <div class="day-cell holiday">
+                    <span class="date-number">7</span>
+                    <span class="khmer-lunar">៦ រោច</span>
+                    <span class="lunar-marker">&#9650;</span>
+                </div>
+                <div class="day-cell holiday">
+                    <span class="date-number">8</span>
+                    <span class="khmer-lunar">៧ រោច</span>
+                    <span class="lunar-marker">&#9650;</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">9</span>
+                    <span class="khmer-lunar">៨ រោច</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">10</span>
+                    <span class="khmer-lunar">៩ រោច</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">11</span>
+                    <span class="khmer-lunar">១០ រោច</span>
+                </div>
+
+                <!-- Week 3 --><div class="day-cell thngai-sil">
+                    <span class="date-number">12</span>
+                    <span class="khmer-lunar">១១ រោច</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">13</span>
+                    <span class="khmer-lunar">១២ រោច</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">14</span>
+                    <span class="khmer-lunar">១៣ រោច</span>
+                </div>
+                <div class="day-cell holiday">
+                    <span class="date-number">15</span>
+                    <span class="khmer-lunar">១៤ រោច</span>
+                    <span class="lunar-marker">&#9650;</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">16</span>
+                    <span class="khmer-lunar">១៥ រោច</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">17</span>
+                    <span class="khmer-lunar">១ កើត</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">18</span>
+                    <span class="khmer-lunar">២ កើត</span>
+                </div>
+
+                <!-- Week 4 --><div class="day-cell thngai-sil">
+                    <span class="date-number">19</span>
+                    <span class="khmer-lunar">៣ កើត</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">20</span>
+                    <span class="khmer-lunar">៤ កើត</span>
+                </div>
+                <div class="day-cell holiday">
+                    <span class="date-number">21</span>
+                    <span class="khmer-lunar">៥ កើត</span>
+                    <span class="lunar-marker">&#9650;</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">22</span>
+                    <span class="khmer-lunar">៦ កើត</span>
+                </div>
+                <div class="day-cell holiday">
+                    <span class="date-number">23</span>
+                    <span class="khmer-lunar">៧ កើត</span>
+                    <span class="lunar-marker">&#9650;</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">24</span>
+                    <span class="khmer-lunar">៨ កើត</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">25</span>
+                    <span class="khmer-lunar">៩ កើត</span>
+                </div>
+                
+                <!-- Week 5 --><div class="day-cell thngai-sil">
+                    <span class="date-number">26</span>
+                    <span class="khmer-lunar">១០ កើត</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">27</span>
+                    <span class="khmer-lunar">១១ កើត</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">28</span>
+                    <span class="khmer-lunar">១២ កើត</span>
+                </div>
+                <div class="day-cell holiday">
+                    <span class="date-number">29</span>
+                    <span class="khmer-lunar">១៣ កើត</span>
+                    <span class="lunar-marker">&#9650;</span>
+                </div>
+                <div class="day-cell">
+                    <span class="date-number">30</span>
+                    <span class="khmer-lunar">១៤ កើត</span>
+                </div>
+                <div class="day-cell holiday">
+                    <span class="date-number">31</span>
+                    <span class="khmer-lunar">១៥ កើត</span>
+                    <span class="lunar-marker">&#9650;</span>
+                </div>
+                <div class="day-cell other-month">
+                    <span class="date-number">1</span>
+                    <span class="khmer-lunar">១ រោច</span>
+                </div>
+
+                <!-- Days from next month (November) to complete the grid --><div class="day-cell other-month thngai-sil">
+                    <span class="date-number">2</span>
+                    <span class="khmer-lunar">២ រោច</span>
+                </div>
+                <div class="day-cell other-month">
+                    <span class="date-number">3</span>
+                    <span class="khmer-lunar">៣ រោច</span>
+                </div>
+                <div class="day-cell other-month">
+                    <span class="date-number">4</span>
+                    <span class="khmer-lunar">៤ រោច</span>
+                </div>
+                <div class="day-cell other-month">
+                    <span class="date-number">5</span>
+                    <span class="khmer-lunar">៥ រោច</span>
+                </div>
+                <div class="day-cell other-month">
+                    <span class="date-number">6</span>
+                    <span class="khmer-lunar">៦ រោច</span>
+                </div>
+                <div class="day-cell other-month">
+                    <span class="date-number">7</span>
+                    <span class="khmer-lunar">៧ រោច</span>
+                </div>
+                <div class="day-cell other-month">
+                    <span class="date-number">8</span>
+                    <span class="khmer-lunar">៨ រោច</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Right Side: Holiday List --><div class="holiday-list-sidebar">
+            <div class="sidebar-header">
+                បុណ្យ ប្រារព្ធពិធីផ្សេងៗ ក្នុងខែតុលា
+                <span class="block text-sm font-normal text-gray-500">Events & Ceremonies in October</span>
+            </div>
+
+            <!-- List of Holidays and Observances --><div class="holiday-item">
+                <span class="date">1</span>
+                <span class="name-khmer">ទិវាអន្តរជាតិមនុស្សចាស់</span>
+                <span class="name-english">(International Day of Older Persons)</span>
+            </div>
+
+            <div class="holiday-item">
+                <span class="date">5</span>
+                <span class="name-khmer">ទិវាគ្រូបង្រៀនពិភពលោក</span>
+                <span class="name-english">(World Teacher's Day)</span>
+            </div>
+
+            <div class="holiday-item">
+                <span class="date">6</span>
+                <span class="name-khmer">សែននំចំណី</span>
+                <span class="name-english">(Mid-Autumn Festival)</span>
+            </div>
+
+            <div class="holiday-item">
+                <span class="date">7</span>
+                <span class="name-khmer">ចេញវស្សា</span>
+                <span class="name-english">(Ending of Buddhist Lent)</span>
+            </div>
+
+            <div class="holiday-item">
+                <span class="date">8</span>
+                <span class="name-khmer">កឋិនកាល</span>
+                <span class="name-english">(Kathina Ceremony)</span>
+            </div>
+
+            <div class="holiday-item public-holiday">
+                <span class="date">15</span>
+                <span class="name-khmer">ព្រះរាជពិធីគោរពព្រះវិញ្ញាណក្ខន្ធ ព្រះករុណា ព្រះបាទសម្តេចព្រះនរោត្តម សីហនុ (ព្រះវររាជបិតាឯករាជ្យ ជាតិ ខ្មែរ)</span>
+                <span class="name-english">King Father's Commemoration Day</span>
+            </div>
+            
+            <div class="holiday-item">
+                <span class="date">23</span>
+                <span class="name-khmer">ទិវាសន្ធិសញ្ញាសន្តិភាពក្រុងប៉ារីស</span>
+                <span class="name-english">(Paris Peace Agreement Day)</span>
+            </div>
+
+            <div class="holiday-item public-holiday">
+                <span class="date">29</span>
+                <span class="name-khmer">ព្រះរាជពិធីគ្រងព្រះបរមសិរីរាជ្យសម្បត្តិ</span>
+                <span class="name-english">King Norodom Sihamoni's Coronation Day</span>
+            </div>
+        </div>
+    </div>
+    <div class="calendar-footer">
+        <p>Rotha Apps © 2024 Khmer Lunar Calendar version: 1.5.1</p>
+    </div>
+
+</body>
+</html>

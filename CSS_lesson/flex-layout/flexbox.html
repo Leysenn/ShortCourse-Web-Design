@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .container{
+            background-color: aquamarine;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        p{
+            padding: 0;
+            margin: 0;
+        }
+        .menulist{
+            background-color: skyblue;
+            border-radius: 10px;
+        }
+        ul{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap:20px;
+            list-style: none;
+        }
+        li{
+            padding: 10px;
+            color: white;
+        }
+        li:hover{
+            background-color: aquamarine;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        img{
+            width: 25%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Most Popular Course</h1>
+        <p>Choose from hundreds of courses from spacialist organization</p>
+    </center>
+    <div class="menulist">
+        <ul>
+            <li>Java Programming</li>
+            <li>Graphic Design</li>
+            <li>Development</li>
+            <li>Finance</li>
+        </ul>
+    </div>
+    <div class="container">
+        <img src="./images/java.jpg" alt="">
+        <img src="./images/Graphicdesign.png" alt="">
+        <img src="./images/Web _Development.png" alt="">
+        <img src="./images/Finance.png" alt="">
+    </div>
+</body>
+</html>

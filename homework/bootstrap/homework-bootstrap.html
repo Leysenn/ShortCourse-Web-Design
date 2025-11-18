@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Car</title>
+    <link rel="stylesheet" href="./about.html">
+    <style>
+      .container-img {
+  display: flow-root;
+  margin-top: 40px;
+}
+
+.float-box {
+  display: flow-root;
+  margin-bottom: 40px;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Left float */
+#img1 {
+  float: left;
+  width: 400px;
+  height: 220px;
+  margin-right: 10px;
+  border-radius: 12px;
+}
+
+/* Right float */
+#img2 {
+  float: right;
+  width: 400px;
+  height: 220px;
+  margin-left: 20px;
+  border-radius: 12px;
+}
+
+.text-box {
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+}
+
+.text-box h2 {
+  color: #333;
+  font-weight: 600;
+}
+
+.text-box p {
+  color: #555;
+  line-height: 1.6;
+}
+
+    </style>
+    <!--  Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+
+    <!--  JavaScript (Popper + Bootstrap) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <center>
+    <nav class="navbar navbar-expand-lg bg-white sticky-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ69hSRNq8HTHJpU_KyAfhddfJp8NgS7lEpQ&s"
+            alt=""
+            class="img-fluid"
+            width="70"
+            height="70"
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./about.html">About</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Products 
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Grade A</a></li>
+                <li><a class="dropdown-item" href="#">Grade B</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <section>
+          <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="carousel-inner">
+              <div class="carousel-item">
+                <img
+                  src="https://f1rst-motors.s3.me-central-1.amazonaws.com/cars/1714771621482-1_626e64bc38.jpg "
+                  class="img-fluid img-thumbnail"
+                  alt="carousel" 
+                />
+              </div>
+              <div class="carousel-item active">
+                <img
+                  src="https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/face_react/ad_personam/2024/gallery/ad_personam_01.jpg"
+                  class="img-fluid img-thumbnail"
+                  alt="carousel"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/face_react/ad_personam/2024/gallery/ad_personam_03.jpg"
+                  class="img-fluid img-thumbnail text-center"
+                  alt="carousel"
+                />
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+      </section>
+
+      <section class="container mt-4">
+        <center>
+          <a
+            class="h2 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover link-black"
+            href="#"
+          >
+            Popular Car
+          </a>
+        </center>
+        <div class="row container mt-4">
+          <div class="col">
+            <div class="card border-0" style="width: 18rem">
+              <img
+                src="https://assets.performancecarexclusive.com/api/assets/pce-web/6b33f9fb-3c65-4d30-abec-36757ecbd4d9/supercar-finance-%7C-why-specialist-brokers-make-all-the-difference.jpg?width=600&height=400&mode=cropupsize&format=webp&force=true"
+                class="card-img-top"
+                alt="car-1"
+              />
+              <div class="card-body">
+                <h5 class="card-title text-center">Model Y</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card border-0" style="width: 18rem">
+              <img
+                src="https://t3.ftcdn.net/jpg/06/30/88/32/360_F_630883272_yJbW98a0EVMXEetNuA8koiWNG4Smw2VA.jpg"
+                class="card-img-top"
+                alt="car-2"
+              />
+              <div class="card-body">
+                <h5 class="card-title text-center">Model X</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card border-0" style="width: 18rem">
+              <img
+                src="https://t4.ftcdn.net/jpg/06/30/88/31/360_F_630883181_X1hiBmWASzxb1Y3yHLhDFF0fLvSDq9mM.jpg"
+                class="card-img-top"
+                alt="car-3"
+              />
+              <div class="card-body">
+                <h5 class="card-title text-center">Model Z</h5>
+              </div>
+            </div>
+          </div>
+          <col />
+        </div>
+      </section>
+
+      <section class="container-img mt-5 p-3">
+        
+        <div class="float-box mb-5">
+          <img
+            src="https://www.topgear.com/sites/default/files/2025/07/1-Lamborghini-Temerario-review-2025.jpg?"
+            alt="Left Image"
+            id="img1"
+            width="400"
+            height="250"
+          />
+          <div class="text-box">
+            <h2>Premium Comes Standard</h2>
+            <p>
+              Premium and sporty, Model 3 Standard gets up to 321 miles of EPA
+              estimated range with an efficient, aerodynamic body design and a smaller
+              battery pack. An all-glass roof offers panoramic views from every seat.
+            </p >
+          </div>
+        </div>
+      
+        <div class="float-box">
+          <img
+            src="https://www.topgear.com/sites/default/files/2025/07/1-Lamborghini-Temerario-review-2025.jpg?"
+            alt="Right Image"
+            id="img2"
+            width="400"
+            height="250"
+          />
+          <div class="text-box">
+            <h2>Premium Comes Standard</h2>
+            <p>
+              Premium and sporty, Model 3 Standard gets up to 321 miles of EPA
+              estimated range with an efficient, aerodynamic body design and a smaller
+              battery pack. An all-glass roof offers panoramic views from every seat.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      
+    </main>
+    <footer>
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+          <div class="card">
+            <img src="https://cdn.wallpapersafari.com/9/89/VsJ9om.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img src="https://robbreport.com/wp-content/uploads/2020/06/lamborghini-centenario-roadster-1.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img src="https://welovecar.vn/wp-content/uploads/2019/07/wlc-lamborghini-veneno-roadster-hang-hiem-4.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img src="https://www.supercars.net/blog/wp-content/uploads/2025/01/Lamborghini-Temerario-109.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </center>
+  </body>
+</html>

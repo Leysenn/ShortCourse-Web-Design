@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        .box{
+            border: 1px solid gainsboro;
+            border-radius: 25px;
+            background-color: azure;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        @media (min-width: 576px) {
+            .container{
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (min-width: 768px) {
+            .container{
+                display: grid;
+                grid-template-columns: 1fr 1fr ;
+            }
+        }
+        @media (min-width: 992px) {
+            .container{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <img src="https://i.pinimg.com/736x/db/db/9b/dbdb9b40df786422e0b0a3e7745acfc6.jpg" alt="" width="250" height="250">
+        </div>
+        <div class="box">
+            <img src="https://i.pinimg.com/736x/db/db/9b/dbdb9b40df786422e0b0a3e7745acfc6.jpg" alt=""  width="250" height="250">
+        </div>
+        <div class="box">
+            <img src="https://i.pinimg.com/736x/db/db/9b/dbdb9b40df786422e0b0a3e7745acfc6.jpg" alt=""  width="250" height="250">
+        </div>
+        <div class="box">
+            <img src="https://i.pinimg.com/736x/db/db/9b/dbdb9b40df786422e0b0a3e7745acfc6.jpg" alt=""  width="250" height="250">
+        </div>
+    </div>
+</body>
+</html>
