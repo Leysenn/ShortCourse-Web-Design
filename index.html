@@ -1,83 +1,597 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- head -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homework</title>
+    <link rel="stylesheet" href="./src/output.css" />
 
+    <style>
+      .carousel-container {
+        perspective: 1000px;
+        touch-action: pan-y pinch-zoom;
+      }
 
+      .carousel-track {
+        transform-style: preserve-3d;
+        transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docuhub — E-commerce</title>
+      .carousel-item {
+        backface-visibility: hidden;
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      }
 
-    <link rel="icon" href="image/favicon.ico" type="image/x-icon">
-    <link rel="canonical" href="https://tesst-bbyp0y20e-sokcheats-projects.vercel.app/">
+      .carousel-item.active {
+        opacity: 1;
+        transform: scale(1) translateZ(0);
+      }
 
-    <meta name="description" content="E-commerce website which accessible for selling and buying products through online.">
-    <meta name="robots" content="index, follow">
+      @media (max-width: 640px) {
+        .carousel-item.prev {
+          opacity: 0;
+          transform: scale(0.8) translateX(-50%) translateZ(-100px);
+        }
 
-<!-- Facebook Meta Tags -->
-<meta property="og:url" content="https://tesst-bbyp0y20e-sokcheats-projects.vercel.app/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="E-commerce">
-<meta property="og:description" content="E-commerce website which accessible for selling and buying products through online.">
-<meta property="og:image" content="https://opengraph.b-cdn.net/production/images/0b8e809b-9b97-4b15-84fc-708f02eafc2e.png?token=fckf6kl1RJeXfEQMhdlWIi2aE5dq8Nbb15HizxnWAhU&height=628&width=1200&expires=33296200529">
-<!-- Helpful additional OG tags -->
-<meta property="og:site_name" content="Docuhub">
-<meta property="og:locale" content="en_US">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="628">
+        .carousel-item.next {
+          opacity: 0;
+          transform: scale(0.8) translateX(50%) translateZ(-100px);
+        }
+      }
 
-<!-- Twitter Meta Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta property="twitter:domain" content="tesst-bbyp0y20e-sokcheats-projects.vercel.app">
-<meta property="twitter:url" content="https://tesst-bbyp0y20e-sokcheats-projects.vercel.app/">
-<meta name="twitter:title" content="E-commerce">
-<meta name="twitter:description" content="E-commerce website which accessible for selling and buying products through online.">
-<meta name="twitter:image" content="https://opengraph.b-cdn.net/production/images/0b8e809b-9b97-4b15-84fc-708f02eafc2e.png?token=fckf6kl1RJeXfEQMhdlWIi2aE5dq8Nbb15HizxnWAhU&height=628&width=1200&expires=33296200529">
-<meta name="twitter:image:alt" content="Docuhub e-commerce preview image">
-<meta name="twitter:site" content="@your_twitter_handle">
-</head>
-<!-- body -->
+      @media (min-width: 641px) {
+        .carousel-item.prev {
+          opacity: 0.7;
+          transform: scale(0.9) translateX(-100%) translateZ(-100px);
+        }
 
-<body>
+        .carousel-item.next {
+          opacity: 0.7;
+          transform: scale(0.9) translateX(100%) translateZ(-100px);
+        }
+      }
 
-    
-    <!-- 
-        <h1>Heading 1</h1>
-        <h2>Heading 2</h2>
-        <h3>Heading 3</h3>
-        <h4>Heading 4</h4>
-        <h5>Heading 5</h5>
-        <h6>Heading 6</h6>
-        
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione ut ipsam magnam non commodi nulla deleniti, necessitatibus aliquid maiores ipsum minus similique eaque illo, reprehenderit atque! Accusamus architecto consequatur sunt?
-        </p> -->
+      .carousel-item.hidden {
+        opacity: 0;
+        transform: scale(0.8) translateZ(-200px);
+      }
 
-    <!-- <b>Using with bold</b> <br> <br>
+      .nav-button {
+        transition: all 0.3s;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
 
-    <em>Using emphasize</em> <br> <br>
+      @media (hover: hover) {
+        .nav-button:hover {
+          background: rgba(255, 255, 255, 0.2);
+          transform: scale(1.1);
+        }
+      }
 
-    <i>Using i as italics</i> <br> <br>
+      .nav-button:active {
+        transform: scale(0.95);
+      }
 
-    <small>Using small</small> <br> <br>
+      .progress-bar {
+        transition: width 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Include this script tag or install `@tailwindplus/elements` via npm: -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> -->
+    <div class="bg-white">
+      <header class="absolute inset-x-0 top-0 z-50">
+        <nav
+          aria-label="Global"
+          class="flex items-center justify-between p-6 lg:px-8"
+        >
+          <div class="flex lg:flex-1">
+            <a href="#" class="-m-1.5 p-1.5">
+              <span class="sr-only">Trip</span>
+              <img
+                src="./assets/matrip-logo.png"
+                alt=""
+                class="h-[70px] w-auto"
+              />
+            </a>
+          </div>
+          <div class="flex lg:hidden">
+            <button
+              type="button"
+              command="show-modal"
+              commandfor="mobile-menu"
+              class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            >
+              <span class="sr-only">Open main menu</span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                data-slot="icon"
+                aria-hidden="true"
+                class="size-6"
+              >
+                <path
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="hidden lg:flex lg:gap-x-12">
+            <a href="#" class="text-sm/6 font-semibold text-gray-900">Place</a>
+            <a href="#" class="text-sm/6 font-semibold text-gray-900">About</a>
+            <a href="#" class="text-sm/6 font-semibold text-gray-900"
+              >Contact Us</a
+            >
+          </div>
+          <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+            <a href="#" class="text-sm/6 font-semibold text-gray-900"
+              >Log in <span aria-hidden="true">&rarr;</span></a
+            >
+          </div>
+        </nav>
+      </header>
+    </div>
+    <!-- main  section-->
+    <main>
+      <div class="fixed inset-0 -z-10">
+        <div
+          class="absolute inset-0 bg-white-to-br from-violet-900/20 via-purple-900/20 to-fuchsia-900/20"
+        ></div>
+        <div
+          class="absolute top-1/4 left-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-violet-500/10 rounded-full filter blur-3xl"
+        ></div>
+        <div
+          class="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-fuchsia-500/10 rounded-full filter blur-3xl"
+        ></div>
+      </div>
 
-    <strong>Using strong for important text</strong>
+      <!-- Main container -->
+      <div class="w-full max-w-6xl mx-auto -z-30 pt-20 sm:pt-24 mb-12">
+        <!-- Carousel container -->
+        <div class="carousel-container relative">
+          <!-- Progress bar -->
+          <div
+            class="absolute top-0 left-0 right-0 h-1 bg-white/10 rounded-full overflow-hidden z-20"
+          >
+            <div
+              class="progress-bar absolute top-0 left-0 h-full w-1/3 bg-gradient-to-r from-white-500 to-white-500"
+            ></div>
+          </div>
 
-    <p>H<sub>2</sub>0</p>
+          <!-- Navigation buttons -->
+          <button
+            class="nav-button absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center z-20 text-white touch-manipulation"
+            onclick="prevSlide()"
+            title="Previous slide"
+          >
+            <svg
+              class="w-5 h-5 sm:w-6 sm:h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              ></path>
+            </svg>
+          </button>
 
-    <p>12<sup>th</sup>October 2025</p>
+          <button
+            class="nav-button absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center z-20 text-white touch-manipulation"
+            onclick="nextSlide()"
+            title="Next slide"
+          >
+            <svg
+              class="w-5 h-5 sm:w-6 sm:h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              ></path>
+            </svg>
+          </button>
 
-    <p>This is <ins>insert</ins> text</p>
+          <!-- Carousel track -->
+          <div
+            class="carousel-track relative h-[400px] sm:h-[500px] md:h-[600px] overflow-hidden"
+          >
+            <!-- Carousel items -->
+            <div
+              class="carousel-item active absolute top-0 left-0 w-full h-full"
+            >
+              <div class="w-full h-full p-4 sm:p-8">
+                <div
+                  class="w-full h-full rounded-xl sm:rounded-2xl overflow-hidden relative group"
+                >
+                  <img
+                    src="https://lp-cms-production.imgix.net/2025-01/Cambodia-Angkor-Wat-Waj-shutterstockRF312461543-crop.jpg"
+                    alt="Geometric art installation"
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div
+                    class="absolute inset-0 bg-gradient-to-br from-white-500/40 to-white-500/40 mix-blend-overlay"
+                  ></div>
+                  <div
+                    class="absolute inset-x-0 bottom-0 p-4 sm:p-8 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
+                  >
+                    <h3
+                      class="text-white text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-3"
+                    >
+                      Angkor What
+                    </h3>
+                    <p
+                      class="text-gray-200 text-sm sm:text-base md:text-lg max-w-2xl"
+                    >
+                      Where geometry meets art in a stunning display of light
+                      and form.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-    <p>This is <del>delete</del>text.</p>
+            <div class="carousel-item next absolute top-0 left-0 w-full h-full">
+              <div class="w-full h-full p-4 sm:p-8">
+                <div
+                  class="w-full h-full rounded-xl sm:rounded-2xl overflow-hidden relative group"
+                >
+                  <img
+                    src="https://i.pinimg.com/1200x/bf/0c/3f/bf0c3fe59703772ebddce17c7592a173.jpg"
+                    alt="Futuristic tech setup"
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div
+                    class="absolute inset-x-0 bottom-0 p-4 sm:p-8 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
+                  >
+                    <h3
+                      class="text-white text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-3"
+                    >
+                      Angkor what
+                    </h3>
+                    <p
+                      class="text-gray-200 text-sm sm:text-base md:text-lg max-w-2xl"
+                    >
+                      Immerse yourself in the cutting edge of technology and
+                      innovation.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-    <p>This word is for <mark>highlight</mark></p> -->
-    
-    <img src="https://i.pinimg.com/736x/85/27/25/8527256fe67f5cedf9e9fac063bcda96.jpg" alt="The woman hold the cat " width="500" height="500">
-    <img src="image/education.jpg" alt="logo-education" width="500" height="500"><br>
+            <div
+              class="carousel-item hidden absolute top-0 left-0 w-full h-full"
+            >
+              <div class="w-full h-full p-4 sm:p-8">
+                <div
+                  class="w-full h-full rounded-xl sm:rounded-2xl overflow-hidden relative group"
+                >
+                  <img
+                    src="https://i.pinimg.com/1200x/58/5e/80/585e805070322ffc68602acb1b321c94.jpg"
+                    alt="Abstract digital art"
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div
+                    class="absolute inset-0 bg-gradient-to-br from-pink-500/40 to-rose-500/40 mix-blend-overlay"
+                  ></div>
+                  <div
+                    class="absolute inset-x-0 bottom-0 p-4 sm:p-8 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
+                  >
+                    <h3
+                      class="text-white text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-3"
+                    >
+                      Neural Dreams
+                    </h3>
+                    <p
+                      class="text-gray-200 text-sm sm:text-base md:text-lg max-w-2xl"
+                    >
+                      AI-generated masterpieces that blur the line between human
+                      and machine creativity.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
+          <!-- Indicators -->
+          <div
+            class="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex gap-1 sm:gap-2 z-20"
+          >
+            <button
+              class="w-8 sm:w-12 h-1 sm:h-1.5 rounded-full bg-white/40 hover:bg-white/60 transition-colors"
+              title="Go to slide 1"
+            ></button>
+            <button
+              class="w-8 sm:w-12 h-1 sm:h-1.5 rounded-full bg-white/20 hover:bg-white/60 transition-colors"
+              title="Go to slide 2"
+            ></button>
+            <button
+              class="w-8 sm:w-12 h-1 sm:h-1.5 rounded-full bg-white/20 hover:bg-white/60 transition-colors"
+              title="Go to slide 3"
+            ></button>
+          </div>
+        </div>
+      </div>
 
-    <a href="./pages/sematic.html">Classwork </a>
-</body>
+      <!-- card dislay -->
+      <section class="w-full bg-white dark:bg-[#0A2025] py-9 px-8">
+        <div class="mx-auto max-w-[1160px]">
+          <main class="flex items-center flex-col md:flex-row gap-10">
+            <div>
+              <img
+                class="mb-7 rounded-xl"
+                src="https://images.pexels.com/photos/30590817/pexels-photo-30590817.jpeg"
+              />
+              <div>
+                <h3
+                  class="text-[#0A2025] dark:text-white text-2xl font-bold font-['Roboto'] text-center"
+                >
+                  Angkor What
+                </h3>
+                <p
+                  class="mt-5 mb-8 text-[#0A2025] dark:text-white text-sm font-normal font-['Roboto'] text-center"
+                >
+                  Welcome to Cambodia
+                </p>
+              </div>
+            </div>
+            <div>
+              <img
+                class="mb-7 rounded-xl"
+                src="https://images.pexels.com/photos/12001673/pexels-photo-12001673.jpeg"
+              />
+              <div>
+                <h3
+                  class="text-[#0A2025] dark:text-white text-2xl font-bold font-['Roboto'] text-center"
+                >
+                  Koh Rong
+                </h3>
+                <p
+                  class="mt-5 mb-8 text-[#0A2025] dark:text-white text-sm font-normal font-['Roboto'] text-center"
+                >
+                  Welcome to Cambodia
+                </p>
+              </div>
+            </div>
+            <div>
+              <img
+                class="mb-7 rounded-xl"
+                src="https://images.pexels.com/photos/30590817/pexels-photo-30590817.jpeg"
+              />
+              <div>
+                <h3
+                  class="text-[#0A2025] dark:text-white text-2xl font-bold font-['Roboto'] text-center"
+                >
+                  Angkor What
+                </h3>
+                <p
+                  class="mt-5 mb-8 text-[#0A2025] dark:text-white text-sm font-normal font-['Roboto'] text-center"
+                >
+                  Welcome to Cambodia
+                </p>
+              </div>
+            </div>
+          </main>
+        </div>
+      </section>
+    </main>
+    <script>
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".carousel-item");
+      const indicators = document.querySelectorAll(
+        ".bottom-2 button, .bottom-4 button"
+      );
+      const progressBar = document.querySelector(".progress-bar");
+      let autoAdvanceTimer;
+      let touchStartX = 0;
+      let touchEndX = 0;
+      const carousel = document.querySelector(".carousel-track");
 
+      // Add touch events for swipe
+      carousel.addEventListener(
+        "touchstart",
+        (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        },
+        { passive: true }
+      );
+
+      carousel.addEventListener(
+        "touchend",
+        (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          handleSwipe();
+        },
+        { passive: true }
+      );
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+        }
+      }
+
+      function updateSlides() {
+        slides.forEach((slide, index) => {
+          slide.className = "carousel-item absolute top-0 left-0 w-full h-full";
+          if (index === currentSlide) {
+            slide.classList.add("active");
+          } else if (index === (currentSlide + 1) % slides.length) {
+            slide.classList.add("next");
+          } else if (
+            index ===
+            (currentSlide - 1 + slides.length) % slides.length
+          ) {
+            slide.classList.add("prev");
+          } else {
+            slide.classList.add("hidden");
+          }
+        });
+
+        // Update indicators
+        indicators.forEach((indicator, index) => {
+          indicator.className = `w-8 sm:w-12 h-1 sm:h-1.5 rounded-full transition-colors ${
+            index === currentSlide ? "bg-white/40" : "bg-white/20"
+          } hover:bg-white/60`;
+        });
+
+        // Update progress bar
+        progressBar.style.width = `${
+          ((currentSlide + 1) / slides.length) * 100
+        }%`;
+      }
+
+      function resetAutoAdvance() {
+        clearInterval(autoAdvanceTimer);
+        autoAdvanceTimer = setInterval(nextSlide, 5000);
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateSlides();
+        resetAutoAdvance();
+      }
+
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        updateSlides();
+        resetAutoAdvance();
+      }
+
+      // Add click handlers to indicators
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener("click", () => {
+          currentSlide = index;
+          updateSlides();
+          resetAutoAdvance();
+        });
+      });
+
+      // Initialize auto advance
+      resetAutoAdvance();
+
+      // Initialize slides
+      updateSlides();
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-blue-300 shadow-lg mt-auto">
+      <div
+        class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+      >
+        <!-- Column 1: Company Info -->
+        <div>
+          <h3 class="text-xl font-semibold text-gray-800">Company</h3>
+          <p class="text-gray-500 mt-3">
+            Delivering quality products with a seamless shopping experience.
+          </p>
+          <p class="text-gray-500 mt-2">© 2024 All rights reserved.</p>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div>
+          <h3 class="text-xl font-semibold text-gray-800">Quick Links</h3>
+          <ul class="mt-3 space-y-2">
+            <li>
+              <a href="#" class="text-gray-500 hover:text-indigo-600 transition"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-500 hover:text-indigo-600 transition"
+                >Shop</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-500 hover:text-indigo-600 transition"
+                >About Us</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-500 hover:text-indigo-600 transition"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Customer Service -->
+        <div>
+          <h3 class="text-xl font-semibold text-gray-800">Customer Service</h3>
+          <ul class="mt-3 space-y-2">
+            <li>
+              <a href="#" class="text-gray-500 hover:text-indigo-600 transition"
+                >FAQs</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-500 hover:text-indigo-600 transition"
+                >Shipping & Returns</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-500 hover:text-indigo-600 transition"
+                >Privacy Policy</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-500 hover:text-indigo-600 transition"
+                >Terms & Conditions</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Newsletter Subscription -->
+        <div>
+          <h3 class="text-xl font-semibold text-gray-800">Stay Updated</h3>
+          <p class="text-gray-500 mt-3">
+            Subscribe to our newsletter for exclusive deals and updates.
+          </p>
+          <div class="mt-4 flex">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              class="w-full px-4 py-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-1"
+            />
+            <button
+              class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-r-lg transition"
+            >
+              Subscribe
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div
+        class="border-t border-blue-200 mt-8 py-4 text-center text-gray-500 text-sm"
+      >
+        Made with ❤️ by Ley Sen
+      </div>
+    </footer>
+  </body>
 </html>
